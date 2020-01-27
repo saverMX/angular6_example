@@ -1,0 +1,18 @@
+﻿.green{
+    background-color: lightgreen;
+}
+
+.red{
+    background-color: lightcoral;
+}
+
+.yellow{
+    background-color: lightyellow;
+}
+
+tr.green > td, 
+tr.red > td, 
+tr.yellow  > td
+{
+    background-color: inherit;
+}

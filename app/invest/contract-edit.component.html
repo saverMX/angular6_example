@@ -1,0 +1,113 @@
+
+    <div class="modal-header">
+        <h4>Contrato Nuevo</h4>
+    </div>
+
+    <div class="modal-body">
+        <form (ngSubmit)="onSubmit()" #angForm="ngForm">
+          <div class="container">
+            <div class="row">
+              <div class="col-md-3 col-sm-2">
+                <label for="folio">Folio</label>
+              </div>
+              <div class="col-md-9 col-sm-8">
+                <input type="text" [(ngModel)]="contract.folio" (blur)="validateFolio(folio.value)"
+                       id="folio"
+                       name="folio"
+                       required
+                       #folio="ngModel"
+                       [disabled]="isRenovation" />
+                <div *ngIf="(folio.invalid && (folio.dirty || folio.touched) )  " class="alert alert-danger">
+                  Folio es requerido.
+                </div>
+                <div *ngIf="(folio.invalid && (folio.dirty || folio.touched)) || invalidFolio " class="alert alert-danger">
+                  El folio ya esta siendo utilizado en otro contrato. Favor de modificarlo.
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 col-sm-2">
+                Inversionista
+              </div>
+              <div class="col-md-9 col-sm-8">
+                <select [(ngModel)]="contract.idInvestor" id="investor" required name="investor" #investor="ngModel">
+                  <option *ngFor="let inv of investors" [selected]="contract.idInvestor === inv.id" [value]="inv.id">
+                    {{inv.userName}}
+                  </option>
+                </select>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 col-sm-2">
+                Variable
+              </div>
+              <div class="col-md-9 col-sm-8">
+                <input type="checkbox" [(ngModel)]="contract.isVariable" id="isVariable" name="isVariable"  />
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 col-sm-2">
+                Contrato
+              </div>
+              <div class="col-md-9 col-sm-8">
+                <select id="contract_type" name="contract_type" [(ngModel)]="contract.idContractType" required #contract_type="ngModel">
+                  <option *ngFor="let t of types" [selected]="t.idContractType === contract.idContractType" [value]="t.idContractType">
+                    {{t.name}}
+                  </option>
+                </select>
+                <div *ngIf="contract_type.invalid && (contract_type.dirty || contract_type.touched)" class="alert alert-danger">
+                  El contrato debe tener un tipo
+                </div>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-md-3 col-sm-2">
+                Inversi&oacute;n
+              </div>
+              <div class="col-md-9 col-sm-8">
+                <input [(ngModel)]="contract.invest" type="number" (blur)="validateLimit(invest.value)"
+                       required
+                       name="invest"
+                       id="invest"
+                       #invest="ngModel"/>
+                <div *ngIf="(invest.invalid && (invest.dirty || invest.touched)) || invalidLimit" class="alert alert-danger">
+                  El limite de la inversion es menor a la permitida para este tipo de contrato.
+                </div>
+              </div>
+            </div>
+            <div class="row">
+
+              <div class="col-md-3 col-sm-2">
+                Inicia
+              </div>
+              <div class="col-md-9 col-sm-8">
+                <div class="form-group">
+                  <div class="input-group">
+                    <input type="text" placeholder="yyyy-mm-dd" readonly [(ngModel)]="contractTime" (ngModelChange)="changeDate()" name="dp" ngbDatepicker #d="ngbDatepicker">
+                    <div class="btn form-inline" (click)="d.toggle()">
+                      <span class="fa fa-calendar"></span>
+                    </div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="row">
+              <div class="col-md-3 col-sm-2">
+                Expira
+              </div>
+              <div class="col-md-9 col-sm-8">
+                {{contract.expiration | date:'y-MM-dd'}}
+              </div>
+            </div>
+
+            <div class="row">
+              <button id="btnSave" [disabled]="angForm.form.invalid ">Guardar</button>
+              <button (click)="close()">Cancelar</button>
+            </div>
+          </div>
+        </form>
+    </div>
+
+

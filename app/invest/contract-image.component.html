@@ -1,0 +1,12 @@
+<div class="modal-body">
+    <form  #content class="box has-advanced-upload" method="post" enctype="multipart/form-data" 
+          [class.is-dragover]="isDragOver" 
+          (drag)="notDragging()" (dragleave)="notDragging()" (drop)="dropping($event)"
+          (dragover)="dragging($event)" (dragenter)="dragging($event)" >
+        <input type="file" id="file" #file style="display:none;" />
+
+        <div class="btn btn-default" (click)="open(file)"><span style="font-size:x-large" class="fa fa-upload" ></span></div>Arrastre la imagen del contrato.
+        <br />
+        <button id="btnForUpload" (click)="save(file)" [class.hidden]="!isDropped" class="btn Drag">Cerrar Contrato</button>
+    </form>
+</div> 

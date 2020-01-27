@@ -1,0 +1,32 @@
+<h4>Renovaciones Pendientes</h4>
+
+<table class="table tab-content table-striped">
+    <thead>
+        <tr>
+            <th class="bg-info"></th>
+            <th class="bg-info">Tipo</th>
+            <th class="bg-info">Inversi&oacute;n</th>
+            <th class="bg-info">Inicio</th>
+            <th class="bg-info">Vencimiento</th>
+            <th class="bg-info">Inversionista</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="contracts.length == 0">
+            <td colspan="9">No se encontraron registros.</td>
+        </tr>
+        <tr *ngFor="let contract of contracts">
+            <td>
+                <button class="btn" (click)="open(contract)"><span class="fa fa-edit"></span></button>
+                <button class="btn" (click)="delete(contract)"><span class="fa fa-trash"></span></button>
+            </td>
+            <td>{{contract.contractType }}</td>
+            <td>{{contract.invest | currency:'MXN' }}</td>
+            <td>  {{contract?.contractDate  | date }}</td>
+            <td> {{contract?.expiration | date }}</td>
+            <td>{{contract.investorName }}</td>
+        </tr>
+    </tbody>
+
+</table>
+<!--<template ngbModalContainer></template>-->

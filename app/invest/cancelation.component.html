@@ -1,0 +1,35 @@
+<div class="h2">Cancelaciones Pendientes</div>
+
+<table class="table tab-content table-striped">
+    <thead>
+        <tr class="info">
+            <th></th>
+            <th>Folio</th>
+            <th>Inversionista</th>
+            <th>Inversi&oacute;n</th>
+            <th>Multa</th>
+            <th>Motivo</th>
+            <th>Estatus</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="cancelations.length == 0">
+            <td colspan="8">No se encontraron registros.</td>
+        </tr>
+        <tr *ngFor="let cancel of cancelations">
+          <td>
+            <button class="btn btn-secondary" *ngIf="cancel.status == 1" (click)="open(cancel)"><span class="fa fa-edit"></span></button>
+            <button class="btn btn-secondary" *ngIf="cancel.status == 2" (click)="upload(cancel)"><span class="fa fa-image" style="color:tomato"></span></button>
+          </td>
+            <td>{{cancel.folio }}</td>
+            <td>{{cancel.investor }}</td>
+            <td>{{cancel.invest | currency:'MXN' }}</td>
+            <td>{{cancel.fee | currency:'MXN' }}</td>
+            <td>{{cancel.reason }}</td>
+            <td>{{cancel.statusName}}</td>
+        </tr>
+    </tbody>
+
+</table>
+<!--<template ngbModalContainer></template>-->

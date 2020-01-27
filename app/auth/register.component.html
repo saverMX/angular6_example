@@ -1,0 +1,44 @@
+<h2>Register</h2>
+<form [formGroup]="registerForm" (ngSubmit)="onSubmit()" >
+  <div class="form-group">
+    <label for="FirstName">First Name</label>
+    <input type="text" formControlName="firstName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.FirstName.errors }" />
+    <div *ngIf="submitted && f.FirstName.errors" class="invalid-feedback">
+      <div *ngIf="f.FirstName.errors.required">First Name is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="LastName">Last Name</label>
+    <input type="text" formControlName="lastName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.LastName.errors }" />
+    <div *ngIf="submitted && f.LastName.errors" class="invalid-feedback">
+      <div *ngIf="f.LastName.errors.required">Last Name is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="UserName">UserName</label>
+    <input type="text" formControlName="userName" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.UserName.errors }" />
+    <div *ngIf="submitted && f.UserName.errors" class="invalid-feedback">
+      <div *ngIf="f.UserName.errors.required">UserName is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Password">Password</label>
+    <input type="Password" formControlName="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.Password.errors }" />
+    <div *ngIf="submitted && f.Password.errors" class="invalid-feedback">
+      <div *ngIf="f.Password.errors.required">Password is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="Reference">Referencia</label>
+    <input type="text" formControlName="reference" class="form-control" (blur)="validateReference(f.reference.value)" [ngClass]="{ 'is-invalid': errorRef }" />
+    <div *ngIf="errorRef" class="is-error">
+      <div >Este usuario no esta registrado en sistema.</div>
+    </div>
+  </div>
+
+  <div class="form-group">
+    <button [disabled]="loading" class="btn btn-primary">Register</button>
+    <img *ngIf="loading" class="pl-3" src="data:image/gif;base64,R0lGODlhEAAQAPIAAP///wAAAMLCwkJCQgAAAGJiYoKCgpKSkiH/C05FVFNDQVBFMi4wAwEAAAAh/hpDcmVhdGVkIHdpdGggYWpheGxvYWQuaW5mbwAh+QQJCgAAACwAAAAAEAAQAAADMwi63P4wyklrE2MIOggZnAdOmGYJRbExwroUmcG2LmDEwnHQLVsYOd2mBzkYDAdKa+dIAAAh+QQJCgAAACwAAAAAEAAQAAADNAi63P5OjCEgG4QMu7DmikRxQlFUYDEZIGBMRVsaqHwctXXf7WEYB4Ag1xjihkMZsiUkKhIAIfkECQoAAAAsAAAAABAAEAAAAzYIujIjK8pByJDMlFYvBoVjHA70GU7xSUJhmKtwHPAKzLO9HMaoKwJZ7Rf8AYPDDzKpZBqfvwQAIfkECQoAAAAsAAAAABAAEAAAAzMIumIlK8oyhpHsnFZfhYumCYUhDAQxRIdhHBGqRoKw0R8DYlJd8z0fMDgsGo/IpHI5TAAAIfkECQoAAAAsAAAAABAAEAAAAzIIunInK0rnZBTwGPNMgQwmdsNgXGJUlIWEuR5oWUIpz8pAEAMe6TwfwyYsGo/IpFKSAAAh+QQJCgAAACwAAAAAEAAQAAADMwi6IMKQORfjdOe82p4wGccc4CEuQradylesojEMBgsUc2G7sDX3lQGBMLAJibufbSlKAAAh+QQJCgAAACwAAAAAEAAQAAADMgi63P7wCRHZnFVdmgHu2nFwlWCI3WGc3TSWhUFGxTAUkGCbtgENBMJAEJsxgMLWzpEAACH5BAkKAAAALAAAAAAQABAAAAMyCLrc/jDKSatlQtScKdceCAjDII7HcQ4EMTCpyrCuUBjCYRgHVtqlAiB1YhiCnlsRkAAAOwAAAAAAAAAAAA==" />
+    <a routerLink="/login" class="btn btn-link">Cancel</a>
+  </div>
+</form>

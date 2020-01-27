@@ -1,0 +1,26 @@
+<div class="modal-header">
+    <h4>Cancelaci&oacute;n Folio: {{cancel.folio}}</h4>
+</div>
+<div class="modal-body">
+    <form  (ngSubmit)="save()" #cancelForm="ngForm">
+        <div class="container">
+            <div class="form-group">
+                <label>Inversion</label>{{cancel.invest}}
+            </div>
+            <div class="form-group" *ngIf="isAdmin">
+              <label>Multa</label> {{cancel.fee}}
+            </div>
+            <div class="form-group">
+                <label>Motivo</label><textarea [(ngModel)]="cancel.reason" name="reasonInp"  required ></textarea>
+            </div>
+            <div class="form-group">
+                <label>Aprobado</label> <input [disabled]="!isAdmin" [(ngModel)]="cancel.approve" type="checkbox" name="approveInp"/>
+            </div>
+        </div>
+        <button [disabled]="!cancelForm.form.valid" >Guardar</button>
+        <button (click)="close()"> Cancel</button>
+    </form>
+</div>
+<div class="modal-footer">
+
+</div>

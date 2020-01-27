@@ -1,0 +1,12 @@
+﻿<div class="modal-body">
+    <form  #content class="box has-advanced-upload" method="post" 
+          [class.is-dragover]="isDragOver" 
+          (drag)="notDragging()" (dragleave)="notDragging()" (drop)="dropping($event)"
+          (dragover)="dragging($event)" (dragenter)="dragging($event)" >
+        <input type="file" id="file" class="hidden" #file />
+        <br />
+        <div class="btn btn-default" (click)="open(file)"><span style="font-size:x-large" class="fa fa-upload"></span></div>Arraste la imagen de la cancelacion.
+        <br />
+        <button id="btnForUpload" (click)="save(file)" [class.hidden]="!isDropped" class="btn Drag">Cancelar Contrato</button>
+    </form>
+</div>

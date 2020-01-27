@@ -1,0 +1,33 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-faded">
+  <button type="button" class="navbar-toggler" aria-controls="myNavBar" aria-expanded="false" data-toggle="collapse"
+          data-target="#myNavBar">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <a class="fa fa-sign-in navbar navbar-brand" routerLink="/">InversioNE</a>
+  <div class="collapse navbar-collapse" id="myNavBar">
+    <ul class="navbar-nav">
+      <li *ngIf="admin" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navAdmin" data-toggle="dropdown" aria-haspopup="true">Inversi&oacute;n</a>
+        <div class="dropdown-menu" aria-labelledby="navAdmin">
+          <a class="dropdown-item" routerLink="/Invest">Contratos</a>
+          <a class="dropdown-item" routerLink="/Invest/Pay">Pagos</a>
+          <a class="dropdown-item" routerLink="/Invest/Renovation">Renovaci&oacute;n</a>
+          <a class="dropdown-item" routerLink="/Invest/Cancelation">Cancelaci&oacute;n</a>
+        </div>
+      </li>
+
+      <li *ngIf="investor" class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" id="navInv" data-toggle="dropdown" aria-haspopup="true">Inversi&oacute;n</a>
+        <div class="dropdown-menu" aria-labelledby="navInv">
+          <a class="dropdown-item" routerLink="/Invest/Investor">Inversiones</a>
+          <a class="dropdown-item" routerLink="/Invest/Cancelation">Cancelaci&oacute;n</a>
+        </div>
+      </li>
+
+      <li *ngIf="anon" class="nav-item"><a class="nav-link" href="/Account/Register"><span class="fa fa-user-plus"></span> Registrar</a></li>
+      <li *ngIf="anon" class="nav-item"><a class="nav-link" href="/Account/Login"><span class="fa fa-sign-in "></span> Login</a></li>
+      <li *ngIf="!anon" class="nav-item"><a (click)="logout()" class="nav-link" ><span class="fa fa-sign-out"></span> Logout</a></li>
+      <li class="nav-item"><a class="nav-link" href="#">{{userName}}</a></li>
+    </ul>
+  </div>
+</nav>

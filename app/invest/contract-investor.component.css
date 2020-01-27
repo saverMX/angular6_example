@@ -1,0 +1,15 @@
+﻿.green{
+    color: green;
+}
+
+.yellow{
+    color: #ffbe0c;
+}
+
+.red{
+    color: red;
+}
+
+.border{
+    border-right: solid 1px black;
+}

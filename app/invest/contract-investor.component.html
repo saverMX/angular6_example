@@ -1,0 +1,107 @@
+<div class="h2">
+    Manejo de Inversi&oacute;n: {{investor}}  
+</div>
+<div class="container">
+  <div class="row">
+    <div class="h2">Inversi&oacute;n</div>
+    <table class="table table-bordered table-striped table-responsive">
+      <thead>
+        <tr>
+          <th>Inversi&oacute;n</th>
+          <th>No. Contratos</th>
+          <th>Pagado</th>
+          <th>Reinvertido</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>
+            {{total | currency}}
+          </td>
+          <td>
+            {{acumulado }}
+          </td>
+          <td>
+            {{pagado | currency}}
+          </td>
+          <td>
+            {{reinvertido | currency}}
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="h2">Contratos</div>
+    <table class="table table-bordered table-responsive">
+      <thead>
+        <tr>
+          <th>Folio</th>
+          <th>Inicio</th>
+          <th>Vencimiento</th>
+          <th>Tipo</th>
+          <th>Capital</th>
+          <th>Reinvertido</th>
+          <th>Cobrado</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of contracts ">
+          <td>{{item.folio}}</td>
+          <td>{{item.contractDate | date}}</td>
+          <td>{{item.expiration | date }}</td>
+          <td>{{item.contractType}}</td>
+          <td>{{item.invest | currency }}</td>
+          <td>{{item.reinvest | currency }}</td>
+          <td>{{item.payed | currency }}</td>
+          <td>
+            <button *ngIf="item.isReinvestable" (click)="renovation(item)" class="btn btn-success">Renovar</button>
+            <button *ngIf="item.isReinvestable" (click)="finish(item)" class="btn btn-secondary" style="margin-left:5px">Terminar</button>
+            <button *ngIf="!item.hasCancelation" (click)="cancelation(item)" class="btn btn-danger">Cancelar</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="row">
+    <div class="h2">Proximos Pagos</div>
+    <table class="table table-bordered table-responsive">
+      <thead>
+        <tr>
+          <th>Contrato</th>
+          <th>Transcurrido</th>
+          <th>Acumulado</th>
+          <th>Fecha Pago</th>
+          <th>% Retorno</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of pays ">
+          <td>{{item.contract}}</td>
+          <td>{{item.elapsed}}</td>
+          <td>{{item.payment | currency }}</td>
+          <td>{{item.payDayTicks | date}}</td>
+          <td>{{item.roi | percent:'2.1-2'}}</td>
+          <td>
+            <button *ngIf="item.isPayable" (click)="requestPay(item)" class="btn btn-success">Cobrar</button>
+            &nbsp;
+            <button *ngIf="item.isReinvestable" (click)="requestReInvest(item)" class="btn btn-secondary">Reinvertir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+
+  <div *ngIf="hasStructure">
+    <div  class="h2" >Estructura</div>
+    <!-- Se muestra la estructura de nodos -->
+    <div  class="container-fluid" style="min-width: 800px; overflow-x: scroll;">
+      <div class="container-fluid" [style.width.px]="maxWidth">
+        <node [root]="root"></node>
+      </div>
+    </div>
+  </div>
+</div>

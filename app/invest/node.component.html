@@ -1,0 +1,27 @@
+
+
+<div  class="container-fluid" style="align-content: center;">
+
+    <div *ngIf="root == null; else with_root">
+        <div class="root">
+            <span class="circle_red" style="text-align:center;" >Empty</span>
+        </div>
+    </div>
+
+    <ng-template  #with_root>
+        <div class="row"  >
+            <div class="col-lg-12 root">
+                <span ngbPopover="{{root?.invest}}" popoverTitle="{{root?.investor}}" class="circle" style="text-align:center;" >{{root?.folio}}</span>
+            </div>
+        </div>
+    
+        <div class="row">
+            <div class="col-lg-6" >
+                <node [root]="root?.left"></node>
+            </div>
+            <div class="col-lg-6">
+                <node [root]="root?.rigth"></node>
+            </div>
+        </div>
+    </ng-template>
+</div>

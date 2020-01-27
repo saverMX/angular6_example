@@ -1,0 +1,61 @@
+<div class="h2">Contractos</div>
+
+
+<div class="well">
+  <!--<select  (ngModelChange)="filterTable(sel.value)" >
+    <option value="0">Todos</option>
+    <option value="1">Pendientes</option>
+    <option value="2">Activos</option>
+    <option value="3">En espera renovacion</option>
+    <option value="4">Vencidos</option>
+  </select>-->
+  <mat-form-field>
+    <mat-select  placeholder="Status" [(ngModel)]="statusSel"  multiple>
+      <mat-option *ngFor="let status of statusList" [value]="status">{{status}}</mat-option>
+    </mat-select>
+  </mat-form-field>
+
+  <select>
+    <option value="2018">2018</option>
+    <option value="2019">2019</option>
+  </select>
+  <button (click)="loadContracts()" class="form-inline">Buscar</button>
+
+</div>
+<button class="btn" (click)="open();"><span class="fa fa-plus"></span></button>
+<table class="table tab-content table-striped">
+    <thead>
+        <tr>
+            <th class="bg-info"></th>
+            <th class="bg-info">Folio</th>
+            <th class="bg-info">Tipo</th>
+            <th class="bg-info">Inversi&oacute;n</th>
+            <th class="bg-info">Inicio</th>
+            <th class="bg-info">Vencimiento</th>
+            <th class="bg-info">Status</th>
+            <th class="bg-info">Inversionista</th>
+            <th class="bg-info">Contrato</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngIf="contracts.length == 0">
+            <td colspan="9" >No se encontraron registros.</td>
+        </tr>
+        <tr *ngFor="let contract of contracts">
+            <td>
+                <button class="btn" [disabled]="disableButton(contract)" (click)="open(contract)"><span class="fa fa-edit"></span></button>
+                <button *ngIf="!contract.hasCancelation" [disabled]="contract.statusOfContract == 6" class="btn" (click)="cancel(contract)"><span style="color:red;" class="fa fa-ban"></span></button>
+            </td>
+            <td>{{contract.folio}}</td>
+            <td>{{contract.contractType }}</td>
+            <td>{{contract.invest | currency:'MXN' }}</td>
+            <td> {{contract.contractDate | date }}</td>
+            <td>{{contract.expiration | date }}</td>
+            <td>{{contract.statusName}}</td>
+            <td>{{contract.investorName }}</td>
+            <td><button class="btn" [disabled]="disableButton(contract)" (click)="load(contract)"><span class="fa fa-upload" [class.green]="contract.HasContractSigned" ></span></button></td>
+        </tr>
+
+    </tbody>
+
+</table>

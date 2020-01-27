@@ -1,0 +1,39 @@
+<div class="h2">Pagos Pendientes</div>
+
+<table class="table table-bordered">
+    <tr>
+        <th class="bg-info" width="5%">Pagar</th>
+        <th class="bg-info">Contrato</th>
+        <th class="bg-info">Inversionista</th>
+        <th class="bg-info">Monto</th>
+        <th class="bg-info">Fecha Pago</th>
+        <th class="bg-info">Pagos Restantes</th>
+        <th class="bg-info">Tipo</th>
+    </tr>
+    <tr *ngIf="pays.length == 0">
+        <td colspan="7">No se encontraron registros.</td>
+    </tr>
+    <tr *ngFor="let pay of pays" [ngClass]="setSemaphore(pay.TimeToPay)">
+        <td >
+            <button class="btn" (click)="open(pay);"><span class="fa fa-money" style="color:green;"></span></button>
+        </td>
+        <td>
+            {{pay.contract}}
+        </td>
+        <td>
+            {{pay.investor}}
+        </td>
+        <td>
+            {{pay.payment | currency:'MXN' }}
+        </td>
+        <td>
+            {{pay.payDayTicks | date}}
+        </td>
+        <td>
+            {{pay.remainingPays}}
+        </td>
+        <td>
+            {{pay.typeName}}
+        </td>
+    </tr>
+</table>

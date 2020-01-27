@@ -1,0 +1,33 @@
+
+    <div class="modal-header">
+
+    </div>
+    <div class="modal-body">
+        <div class="container">
+            <div class="form-group">
+                <label>Fecha Pago</label>
+                <input type="text" placeholder="yyyy-mm-dd" readonly [(ngModel)]="contractTime" id="d" name="d" ngbDatepicker #d="ngbDatepicker">
+                <div class="btn form-inline" (click)="d.toggle()">
+                    <span class="fa fa-calendar"></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label>Forma Pago</label>
+                <select [(ngModel)]="payType">
+                    <option selected value="1">Transferencia</option>
+                    <option value="2">Deposito</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label>Comprobante</label>
+                <input type="file" #file />
+            </div>
+            <div class="form-group">
+                <button (click)="onSubmit(file)">Guardar</button>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+
+    </div>
+    
